@@ -33,7 +33,7 @@ from livekit.agents.llm.chat_context import FunctionCall
 from livekit.agents.llm.utils import execute_function_call
 from livekit.plugins import ai_coustics, google
 
-logger = logging.getLogger("agent-assistant-8d0")
+logger = logging.getLogger("agent-assistant-capstone-2026")
 
 load_dotenv(".env.local")
 
@@ -52,9 +52,10 @@ def _to_json_serializable(obj):
 _JSON_TYPES = {"str": "string", "int": "integer", "float": "number", "bool": "boolean"}
 
 
-def _load_config() -> dict:
+def _load_config(jsonstring) -> dict:
     return json.loads(
-        Path(__file__).with_name("prompt.json").read_text(encoding="utf-8")
+        jsonstring
+        # Path(__file__).with_name("prompt.json").read_text(encoding="utf-8")
     )
 
 
@@ -116,8 +117,8 @@ class UserDataTask(AgentTask):
 
 
 class DefaultAgent(Agent):
-    def __init__(self) -> None:
-        self._cfg = _load_config()
+    def __init__(self, metadata) -> None:
+        self._cfg = _load_config(metadata)
         self._p = self._cfg["prompts"]
         da = self._p["default_agent"]
         self._agent_instructions = da["agent_instructions"]
@@ -325,7 +326,7 @@ async def entrypoint(ctx: JobContext):
     ctx.proc.userdata["dc_results"] = None
 
     await session.start(
-        agent=DefaultAgent(),
+        agent=DefaultAgent(ctx.job.metadata),
         room=ctx.room,
         room_options=room_io.RoomOptions(
             audio_input=room_io.AudioInputOptions(

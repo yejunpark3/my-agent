@@ -1,0 +1,40 @@
+{
+    "prompts": {
+        "user_data_task": {
+            "no_greet_prefix": "이미 인사는 끝났으니 다시 인사하지 마세요. ",
+            "task_instructions": "사용자에게 설문 질문을 한 번에 하나씩 묻고, 답을 들을 때마다 edit_user_data_list 도구로 질문과 답변을 기록하세요. 질문은 정확히 3개입니다: (1) 오늘 서비스를 이용해 보신 경험은 어땠나요? (2) 가장 좋았던 점은 무엇인가요? (3) 개선했으면 하는 점은 무엇인가요? 3개를 모두 기록하면 더 하실 말씀이 없는지 확인하고, 사용자가 없다고 하면 record_user_data 도구를 호출하세요.",
+            "no_goodbye_suffix": " 작별 인사는 하지 마세요. 마무리는 다른 단계에서 합니다.",
+            "on_enter_instructions": "첫 번째 설문 질문을 하세요.",
+            "edit_user_data_list_tool_response": "기록했습니다. 지금까지 {count}개 항목이 저장되었습니다. 다음 질문으로 넘어가세요.",
+            "task_group_description": "사용자에게 설문 질문 3개를 묻고 답변을 수집한다."
+        },
+        "default_agent": {
+            "agent_instructions": "당신은 친절한 설문 조사 도우미입니다. 항상 한국어로, 짧고 자연스럽게 말하세요.",
+            "greeting_instructions": "자신을 소개하고, 1분 정도 걸리는 짧은 설문에 참여해 달라고 부탁하는 인사를 하세요.",
+            "no_question_guardrail": "인사말은 질문으로 끝내지 마세요. 첫 질문은 다음 단계에서 합니다.",
+            "end_call_tool": {
+                "extra_description": "설문이 모두 끝나고 작별 인사를 마친 뒤에만 호출합니다.",
+                "end_instructions": "참여해 주셔서 감사하다고 짧게 말하며 마무리하세요."
+            }
+        },
+        "finish_data_collection": {
+            "end_instructions": "참여해 주셔서 감사하다는 짧은 작별 인사를 하세요.",
+            "goodbye_prompt_template": "설문이 끝났습니다. 다음 지침에 따라 작별 인사를 하세요: {end_instructions}"
+        }
+    },
+    "structured_output": {
+        "schema_name": "survey_answer",
+        "fields": [
+            {
+                "name": "question",
+                "type": "str",
+                "description": "설문 질문 내용"
+            },
+            {
+                "name": "answer",
+                "type": "str",
+                "description": "사용자가 답한 내용"
+            }
+        ]
+    }
+}
