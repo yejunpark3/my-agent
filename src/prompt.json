@@ -1,0 +1,35 @@
+{
+    "prompts": {
+        "user_data_task": {
+            "no_greet_prefix": "...",
+            "task_instructions": "...",
+            "no_goodbye_suffix": "...",
+            "on_enter_instructions": "...",
+            "edit_user_data_list_tool_response": "...",
+            "task_group_description": "..."
+        },
+        "default_agent": {
+            "agent_instructions": "...",
+            "greeting_instructions": "...",
+            "no_question_guardrail": "...",
+            "end_call_tool": {
+                "extra_description": "...",
+                "end_instructions": "..."
+            }
+        },
+        "finish_data_collection": {
+            "end_instructions": "...",
+            "goodbye_prompt_template": "..."
+        }
+    },
+    "structured_output": {
+        "schema_name": "...",
+        "fields": [
+            {
+                "name": "...",
+                "type": "...",
+                "description": "..."
+            }
+        ]
+    }
+}
